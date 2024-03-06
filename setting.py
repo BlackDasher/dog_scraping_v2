@@ -12,7 +12,7 @@ import requests
 
 # Get Profile uuid of OctoBrowser
 def fnGetUUID(profileName):
-    response_octo = requests.request("GET", f'{OCTO_AUTOMATION_URL}?search={profileName}', headers=OCTO_HEADER)
+    response_octo = requests.request("GET", f'{OCTO_AUTOMATION_URL}?search={profileName}', headers=OCTO_HEADER, timeout=60)
     data_uuid = response_octo.json()
     uuid = data_uuid.get('data')[0]['uuid']
     return uuid
@@ -21,14 +21,14 @@ def fnGetUUID(profileName):
 # Profile id is uuid from fnGetUUID()
 def get_debug_port(profile_id):
     data = requests.post(
-        f'{LOCAL_API}/start', json={'uuid': profile_id, 'headless': False, 'debug_port': True}
-    ).json()
+        f'{LOCAL_API}/start', json={'uuid': profile_id, 'headless': False, 'debug_port': True}, 
+    timeout=60).json()
     print(data)
     return data['debug_port']
 def stop_profile(profile_id):
     data = requests.post(
-        f'{LOCAL_API}/stop', json={'uuid': profile_id}
-    ).json()
+        f'{LOCAL_API}/stop', json={'uuid': profile_id}, 
+    timeout=60).json()
     print(data)
 
 # Create webdriver

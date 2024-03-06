@@ -76,7 +76,7 @@ class DogDataProcessor:
         return header_json
     def upload_image_to_wordpress(self, file_path, url, header_json):
         media = {'file': open(file_path,"rb"),'caption': 'My great demo picture'}
-        responce = requests.post(url + "wp-json/wp/v2/media", headers = header_json, files = media)
+        responce = requests.post(url + "wp-json/wp/v2/media", headers = header_json, files = media, timeout=60)
         print(responce)
     def process_unique_keys(self):
         hed = self.header("DEVGURU","ptJl zgJu T2a5 DaZ8 fcnC QOKg")

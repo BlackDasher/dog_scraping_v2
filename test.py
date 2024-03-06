@@ -5,7 +5,7 @@ import os
 api_url = 'https://nawtavailableanimalsapi.mycharms.uk/api/Public/AnimalImage?id=4887&w=450&h=400&tblid=10976'
 
 # Send a GET request to the API to download the image
-response = requests.get(api_url)
+response = requests.get(api_url, timeout=60)
 
 # Check if the request was successful
 if response.status_code == 200:
